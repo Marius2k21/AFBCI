@@ -77,7 +77,7 @@ if (!isset($_GET['code']) && !isset($_POST['provider'])) {
 
 require 'vendor/autoload.php';
 
-include("../connexion.php");
+include("../../connexion.php");
 session_start(); // Démarre une nouvelle session ou reprend une session existante
 
 $providerName = '';

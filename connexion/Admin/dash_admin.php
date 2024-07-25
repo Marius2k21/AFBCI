@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("connexion.php");
+include("../connexion.php");
 
 // Vérifie si l'utilisateur est connecté
 if (!isset($_SESSION['id_admin'])) {
@@ -34,7 +34,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau de Bord Administrateur</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <style>
         .profile-photo {
             border-radius: 50%;

@@ -6,7 +6,7 @@ use PHPMailer\PHPMailer\Exception;
 // Chargement de l'autoloader de Composer
 require __DIR__ . '/vendor/autoload.php';
 
-include("connexion.php"); // Inclure le fichier de connexion à la base de données
+include("../connexion.php"); // Inclure le fichier de connexion à la base de données
 
 // Vérifie si la méthode de la requête HTTP est POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -94,7 +94,7 @@ function sendEmail($to, $subject, $body) {
     <link rel="icon" href="img/logo1.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Réinitialisation du mot de passe</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <style>
        .form-container {

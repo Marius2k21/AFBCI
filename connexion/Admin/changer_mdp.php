@@ -1,6 +1,6 @@
 <?php
 // Inclusion de la connexion à la base de données
-include("connexion.php");
+include("../connexion.php");
 
 // Récupération des paramètres de la requête GET
 $token = $_GET['token'];
@@ -48,7 +48,7 @@ $conn->close();
     <link rel="icon" href="img/logo1.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Changer le mot de passe</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
     
 </head>
 <body>
