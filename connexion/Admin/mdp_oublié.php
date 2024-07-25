@@ -91,7 +91,7 @@ function sendEmail($to, $subject, $body) {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <link rel="icon" href="img/logo1.png" type="image/x-icon">
+    <link rel="icon" href="../../img/logo.jpg" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Réinitialisation du mot de passe</title>
     <link href="../../css/bootstrap.min.css" rel="stylesheet">

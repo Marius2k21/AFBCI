@@ -113,7 +113,7 @@
             <div class="row justify-content-start">
                 <div class="col-lg-8 text-center text-lg-start">
                     <strong class="display-1 text-warning">Bienvenue chez l'AFBCI</strong>
-                    <p class="fs-4 text-warning mb-4">La société chargée de la protectection l’environnement et assainir le cadre de vies des populations. 
+                    <p class="fs-4 text-warning mb-4">La société chargée de la protection l’environnement et assainir le cadre de vies des populations. 
                     </p>
                     <div class="pt-2">
                         

@@ -101,7 +101,8 @@
             
             <a href="contact.php"  class="nav-item nav-link active">Contact</a>
         </div>
-        
+            <a href="connexion/code_admin_login.php"  class="nav-item nav-link">Se connecter</a>
+            <a href="connexion/code_admin_signup.php"  class="nav-item nav-link">S'inscrire</a>
     </div>
 </nav>
 

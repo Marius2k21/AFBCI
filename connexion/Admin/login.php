@@ -47,12 +47,19 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="../../img/logo.jpg" type="image/x-icon">
     <style>
         .form-container {
             border-radius: 15px;
         }
         .forgot-password {
             text-align: right;
+        }
+        .logo {
+            display: block;
+            margin: 0 auto;
+            width: 100px; 
+            cursor: pointer;
         }
     </style>
 </head>
@@ -61,6 +68,9 @@ $conn->close();
         <div class="row justify-content-center align-items-center vh-100">
             <div class="col-12 col-md-10 col-lg-8">
                 <div class="bg-primary p-5 m-3 form-container">
+                    <a href="../../index.php" class="text-center mb-4">
+                        <img src="../../img/logo.jpg" alt="Logo du projet" class="logo mb-3">
+                    </a>
                     <h2 class="text-center text-light mb-4">Connexion</h2>
                     <?php if (isset($error_message)): ?>
                         <div class="alert alert-danger"><?php echo htmlspecialchars($error_message); ?></div>
