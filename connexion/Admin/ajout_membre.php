@@ -20,12 +20,37 @@ $result = $stmt->get_result();
 if ($result->num_rows == 1) {
     $admin = $result->fetch_assoc();
 } else {
-    echo "Erreur: Impossible de récupérer les informations de l'administrateur.";
+    echo "Veullez vous connecter.";
     exit();
 }
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Récupération des données du formulaire
+    $nom = $_POST['nom'];
+    $prenom = $_POST['prenom'];
+    $role = $_POST['role'];
+    $email = $_POST['email'];
+    $telephone = $_POST['telephone'];
+    $adresse = $_POST['adresse'];
+
+
+        // Insertion des données dans la base de données
+        $stmt = $conn->prepare("INSERT INTO membre (nom, prenom, role, telephone, adresse, email) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $nom, $prenom, $role, $telephone, $adresse, $email);
+
+        if ($stmt->execute()) {
+            $_SESSION['success_message'] = "Inscription réussie.";
+        } else {
+            $_SESSION['error_message'] = "erreur d'ajout! vérifiez correctement les informations d'ajout: " . $stmt->error;
+        }
+
+        $stmt->close();
+        
+    }
 
 // Fermeture de la connexion à la base de données
 $conn->close();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +58,7 @@ $conn->close();
 
 <head>
     <meta charset="utf-8">
-    <title>Admin Accueil</title>
+    <title>Ajout de membres</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         
 
@@ -76,32 +101,6 @@ $conn->close();
             object-fit: cover;
 
         }
-        .info-box {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-        }
-        .info-box h4 {
-            color: #76BD0C;
-        }
-        .info-box ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        .info-box ul li {
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-        }
-        .info-box ul li:last-child {
-            border-bottom: none;
-        }
-        .info-box ul li i {
-            color: #76BD0C;
-            margin-right: 10px;
-        }
-        
         
     </style>
 
@@ -147,11 +146,11 @@ $conn->close();
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-0 pe-4 border-end border-5 border-success">
-            <a href="#" class="nav-item nav-link active">Accueil</a>
+            <a href="index_admin.php" class="nav-item nav-link ">Accueil</a>
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Ajouter</a>
+                <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Ajouter</a>
                 <div class="dropdown-menu m-0">
-                    <a href="ajout_membre.php" class="dropdown-item">Membres</a>
+                    <a href="#" class="dropdown-item">Membres</a>
                     <a href="#" class="dropdown-item">Materiels</a>
                 </div>
             </div>
@@ -166,9 +165,7 @@ $conn->close();
             <a href="contact.php"  class="nav-item nav-link">Messages</a>
             
         </div>
-        <a href="#">
-            <img src="<?php echo htmlspecialchars($admin['photo_admin']); ?>" alt="Photo de Profil" class="profile-photo  m-2 mt-0 mb-0">
-        </a>
+        <img src="<?php echo htmlspecialchars($admin['photo_admin']); ?>" alt="Photo de Profil" class="profile-photo  m-2 mt-0 mb-0">
     </div>
 </nav>
 
@@ -177,8 +174,8 @@ $conn->close();
         <div class="container py-5">
             <div class="row justify-content-start">
                 <div class="col-lg-8 text-center text-lg-start">
-                    <strong class="display-1 text-warning">Bienvenue, Administrateur <?php echo htmlspecialchars( $admin['nom_admin']); ?></strong>
-                    <p class="fs-4 text-warning mb-4">Gerer les tâches liées à l'association des femmes balayeuses de Côte d'Ivoire. 
+                    <strong class="display-1 text-warning">Ajouter des membres ici</strong>
+                    <p class="fs-4 text-warning mb-4">Vous pouvez enregistrer les membres de l'association sur cette page. 
                     </p>
                     <div class="pt-2">
                         
@@ -188,36 +185,6 @@ $conn->close();
         </div>
         
     </div>
-
-    <!-- Section d'Informations sur le Paiement -->
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-lg-12 mb-4">
-                <div class="info-box">
-                    <h2>Les tâches que vous pouvez éffectuer</h2>
-                    <h4>Ajout des membres de l'association</h4>
-                    <p>Pour ajouter un membres à votre organisation :</p>
-                    <ul>
-                        <li> Avoir les informations nécessaires comme le nom,prénom, role, numéo de téléphone... sur ce membre</li>
-                        <li> remplir le formulaire pour ajouter un membre</li>
-                        <li> Puis Appuyer valider pour confirmer l'ajout</li>
-                    </ul>
-                    <h4>Ajouter des matériels</h4>
-                    <p>Vous pouvez enregistrer l'ensemble de vos matériels pour avoir une tracabilité sur vos équipements</p>
-                    
-                    <h4>Gérer les membres et matériels</h4>
-                    <p>Vous pouvez :</p>
-                    <ul>
-                        <li>Supprimer des membres; au cas où ils ne font plus partir de l'association par exemple</li>
-                        <li>Modifier les informations d'un membre</li>
-                        <li>Supprimer également des matériels...</li>
-                    </ul>
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Section d'Informations sur le Paiement End -->
 
     <div class="container-fluid bg-dark bg-footer text-light py-5">
         <div class="container py-5">
