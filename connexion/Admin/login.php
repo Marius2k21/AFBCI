@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['photo_admin'] = $photo_admin;
 
             // Redirection vers le tableau de bord
-            header("Location: dash_admin.php");
+            header("Location: index_admin.php");
             exit();
         } else {
             $error_message = "Email ou mot de passe incorrect.";
