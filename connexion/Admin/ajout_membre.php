@@ -186,6 +186,55 @@ $conn->close();
         
     </div>
 
+    <!-- formulaire start -->
+    <div class="container">
+        <div class="row justify-content-center align-items-center vh-100">
+            <div class="col-12 col-md-10 col-lg-8">
+                <div class="bg-primary p-5 m-3 form-container">
+                    <h2 class="text-center text-light mb-4">Ajout d'un membre</h2>
+                    <?php
+                    if (isset($_SESSION['error_message'])): ?>
+                        <div class="alert alert-danger"><?php echo htmlspecialchars($_SESSION['error_message']); ?></div>
+                        <?php unset($_SESSION['error_message']); ?>
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION['success_message'])): ?>
+                        <div class="alert alert-success"><?php echo htmlspecialchars($_SESSION['success_message']); ?></div>
+                        <?php unset($_SESSION['success_message']); ?>
+                    <?php endif; ?>
+                    <form action="" method="post">
+                        <div class="row g-3">
+                            
+                            <div class="col-12 ">
+                                <input type="text" class="form-control bg-light border-0 py-3" name="nom" placeholder="Nom" required="required">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control bg-light border-0 py-3" name="prenom" placeholder="Prénom" required="required">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <input type="text" class="form-control bg-light border-0 py-3" name="role" placeholder="Rôle ou Poste" required="required">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <input type="text" class="form-control bg-light border-0 py-3" name="telephone" placeholder="Numéro de téléphone">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control bg-light border-0 py-3" name="adresse" placeholder="Adresse" required="required">
+                            </div>
+                            <div class="col-12">
+                                <input type="email" class="form-control bg-light border-0 py-3" name="email" placeholder="Email" >
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-secondary w-100 py-3" type="submit">Ajouter</button>
+                            </div>
+                            
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- formulaire end -->
+
     <div class="container-fluid bg-dark bg-footer text-light py-5">
         <div class="container py-5">
             <div class="row g-5">
