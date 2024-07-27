@@ -6,32 +6,38 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit3941aca64de22739161b09b32c186601
 {
-    public static $files = array (
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
-        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
-        '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
+        'Z' => 
+        array (
+            'ZipStream\\' => 10,
+        ),
         'P' => 
         array (
+            'Psr\\SimpleCache\\' => 16,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
+            'PhpOffice\\PhpSpreadsheet\\' => 25,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
-        'K' => 
+        'M' => 
         array (
-            'Kkiapay\\' => 8,
+            'Matrix\\' => 7,
         ),
-        'G' => 
+        'C' => 
         array (
-            'GuzzleHttp\\Psr7\\' => 16,
-            'GuzzleHttp\\Promise\\' => 19,
-            'GuzzleHttp\\' => 11,
+            'Complex\\' => 8,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'ZipStream\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/maennchen/zipstream-php/src',
+        ),
+        'Psr\\SimpleCache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/simple-cache/src',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-factory/src',
@@ -41,25 +47,21 @@ class ComposerStaticInit3941aca64de22739161b09b32c186601
         array (
             0 => __DIR__ . '/..' . '/psr/http-client/src',
         ),
+        'PhpOffice\\PhpSpreadsheet\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpoffice/phpspreadsheet/src/PhpSpreadsheet',
+        ),
         'PHPMailer\\PHPMailer\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
-        'Kkiapay\\' => 
+        'Matrix\\' => 
         array (
-            0 => __DIR__ . '/..' . '/kkiapay/kkiapay-php/src',
+            0 => __DIR__ . '/..' . '/markbaker/matrix/classes/src',
         ),
-        'GuzzleHttp\\Psr7\\' => 
+        'Complex\\' => 
         array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
-        ),
-        'GuzzleHttp\\Promise\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/promises/src',
-        ),
-        'GuzzleHttp\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+            0 => __DIR__ . '/..' . '/markbaker/complex/classes/src',
         ),
     );
 

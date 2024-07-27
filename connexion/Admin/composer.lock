@@ -1,9 +1,14 @@
 {
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "68157cc8aa175f94f27cfcad53ef8c18",
     "packages": [
         {
             "name": "maennchen/zipstream-php",
             "version": "3.1.0",
-            "version_normalized": "3.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/maennchen/ZipStream-PHP.git",
@@ -33,9 +38,7 @@
                 "guzzlehttp/psr7": "^2.4",
                 "psr/http-message": "^2.0"
             },
-            "time": "2023-06-21T14:59:35+00:00",
             "type": "library",
-            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "ZipStream\\": "src/"
@@ -82,12 +85,11 @@
                     "type": "open_collective"
                 }
             ],
-            "install-path": "../maennchen/zipstream-php"
+            "time": "2023-06-21T14:59:35+00:00"
         },
         {
             "name": "markbaker/complex",
             "version": "3.0.2",
-            "version_normalized": "3.0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MarkBaker/PHPComplex.git",
@@ -108,9 +110,7 @@
                 "phpunit/phpunit": "^7.0 || ^8.0 || ^9.0",
                 "squizlabs/php_codesniffer": "^3.7"
             },
-            "time": "2022-12-06T16:21:08+00:00",
             "type": "library",
-            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Complex\\": "classes/src/"
@@ -136,12 +136,11 @@
                 "issues": "https://github.com/MarkBaker/PHPComplex/issues",
                 "source": "https://github.com/MarkBaker/PHPComplex/tree/3.0.2"
             },
-            "install-path": "../markbaker/complex"
+            "time": "2022-12-06T16:21:08+00:00"
         },
         {
             "name": "markbaker/matrix",
             "version": "3.0.1",
-            "version_normalized": "3.0.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/MarkBaker/PHPMatrix.git",
@@ -166,9 +165,7 @@
                 "sebastian/phpcpd": "^4.0",
                 "squizlabs/php_codesniffer": "^3.7"
             },
-            "time": "2022-12-02T22:17:43+00:00",
             "type": "library",
-            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Matrix\\": "classes/src/"
@@ -195,12 +192,11 @@
                 "issues": "https://github.com/MarkBaker/PHPMatrix/issues",
                 "source": "https://github.com/MarkBaker/PHPMatrix/tree/3.0.1"
             },
-            "install-path": "../markbaker/matrix"
+            "time": "2022-12-02T22:17:43+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
             "version": "v6.9.1",
-            "version_normalized": "6.9.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
@@ -239,9 +235,7 @@
                 "symfony/polyfill-mbstring": "To support UTF-8 if the Mbstring PHP extension is not enabled (^1.2)",
                 "thenetworg/oauth2-azure": "Needed for Microsoft XOAUTH2 authentication"
             },
-            "time": "2023-11-25T22:23:28+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "PHPMailer\\PHPMailer\\": "src/"
@@ -279,12 +273,11 @@
                     "type": "github"
                 }
             ],
-            "install-path": "../phpmailer/phpmailer"
+            "time": "2023-11-25T22:23:28+00:00"
         },
         {
             "name": "phpoffice/phpspreadsheet",
             "version": "2.2.0",
-            "version_normalized": "2.2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPOffice/PhpSpreadsheet.git",
@@ -338,9 +331,7 @@
                 "mpdf/mpdf": "Option for rendering PDF with PDF Writer",
                 "tecnickcom/tcpdf": "Option for rendering PDF with PDF Writer"
             },
-            "time": "2024-07-24T13:21:18+00:00",
             "type": "library",
-            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "PhpOffice\\PhpSpreadsheet\\": "src/PhpSpreadsheet"
@@ -386,12 +377,11 @@
                 "issues": "https://github.com/PHPOffice/PhpSpreadsheet/issues",
                 "source": "https://github.com/PHPOffice/PhpSpreadsheet/tree/2.2.0"
             },
-            "install-path": "../phpoffice/phpspreadsheet"
+            "time": "2024-07-24T13:21:18+00:00"
         },
         {
             "name": "psr/http-client",
             "version": "1.0.3",
-            "version_normalized": "1.0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-client.git",
@@ -407,14 +397,12 @@
                 "php": "^7.0 || ^8.0",
                 "psr/http-message": "^1.0 || ^2.0"
             },
-            "time": "2023-09-23T14:17:50+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\Http\\Client\\": "src/"
@@ -441,12 +429,11 @@
             "support": {
                 "source": "https://github.com/php-fig/http-client"
             },
-            "install-path": "../psr/http-client"
+            "time": "2023-09-23T14:17:50+00:00"
         },
         {
             "name": "psr/http-factory",
             "version": "1.1.0",
-            "version_normalized": "1.1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-factory.git",
@@ -462,14 +449,12 @@
                 "php": ">=7.1",
                 "psr/http-message": "^1.0 || ^2.0"
             },
-            "time": "2024-04-15T12:06:14+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "1.0.x-dev"
                 }
             },
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\Http\\Message\\": "src/"
@@ -499,12 +484,11 @@
             "support": {
                 "source": "https://github.com/php-fig/http-factory"
             },
-            "install-path": "../psr/http-factory"
+            "time": "2024-04-15T12:06:14+00:00"
         },
         {
             "name": "psr/http-message",
             "version": "2.0",
-            "version_normalized": "2.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
@@ -519,14 +503,12 @@
             "require": {
                 "php": "^7.2 || ^8.0"
             },
-            "time": "2023-04-04T09:54:51+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "2.0.x-dev"
                 }
             },
-            "installation-source": "dist",
             "autoload": {
                 "psr-4": {
                     "Psr\\Http\\Message\\": "src/"
@@ -555,12 +537,11 @@
             "support": {
                 "source": "https://github.com/php-fig/http-message/tree/2.0"
             },
-            "install-path": "../psr/http-message"
+            "time": "2023-04-04T09:54:51+00:00"
         },
         {
             "name": "psr/simple-cache",
             "version": "3.0.0",
-            "version_normalized": "3.0.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/simple-cache.git",
@@ -575,14 +556,12 @@
             "require": {
                 "php": ">=8.0.0"
             },
-            "time": "2021-10-29T13:26:27+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
                     "dev-master": "3.0.x-dev"
                 }
             },
-            "installation-source": "source",
             "autoload": {
                 "psr-4": {
                     "Psr\\SimpleCache\\": "src/"
@@ -609,9 +588,16 @@
             "support": {
                 "source": "https://github.com/php-fig/simple-cache/tree/3.0.0"
             },
-            "install-path": "../psr/simple-cache"
+            "time": "2021-10-29T13:26:27+00:00"
         }
     ],
-    "dev": true,
-    "dev-package-names": []
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.6.0"
 }

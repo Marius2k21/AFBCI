@@ -284,6 +284,10 @@ $conn->close();
                         <?php endwhile; ?>
                     </tbody>
                 </table>
+                <form method="post" action="export.php" class="text-center">
+                    <button type="submit" class="mb-4 btn btn-secondary rounded-pill py-2 px-4 mx-2 text-center">Télécharger la liste des membres</button>
+                </form>
+
 
                 <nav aria-label="Page navigation">
                     <ul class="pagination">
@@ -312,7 +316,7 @@ $conn->close();
     <div class="modal fade" id="modal-modifier" tabindex="-1" aria-labelledby="modalModifierLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-primary text-light">
                     <h5 class="modal-title" id="modalModifierLabel">Modifier membre</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
