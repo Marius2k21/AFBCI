@@ -23,29 +23,35 @@ if ($result->num_rows == 1) {
     echo "Veullez vous connecter.";
     exit();
 }
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupération des données du formulaire
     $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $role = $_POST['role'];
-    $email = $_POST['email'];
-    $telephone = $_POST['telephone'];
-    $adresse = $_POST['adresse'];
+    $description = $_POST['description'];
+    $marque = $_POST['marque'];
+    $modele = $_POST['modele'];
+    $date_achat = $_POST['date_achat'];
+    $prix_achat = $_POST['prix_achat'];
+    $etat = $_POST['etat'];
+    $fournisseur = $_POST['fournisseur'];
+    $contact_fournisseur = $_POST['contact_fournisseur'];
+    $quantite = $_POST['quantite'];
 
+    // Insertion des données dans la base de données
+    $stmt = $conn->prepare("INSERT INTO materiels (nom, description, marque, modele, date_achat, prix_achat, etat, fournisseur, contact_fournisseur, quantite) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssisisi", $nom, $description, $marque, $modele, $date_achat, $prix_achat, $etat, $fournisseur, $contact_fournisseur, $quantite);
 
-        // Insertion des données dans la base de données
-        $stmt = $conn->prepare("INSERT INTO membre (nom, prenom, role, telephone, adresse, email) VALUES (?, ?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssss", $nom, $prenom, $role, $telephone, $adresse, $email);
-
-        if ($stmt->execute()) {
-            $_SESSION['success_message'] = "Inscription réussie.";
-        } else {
-            $_SESSION['error_message'] = "erreur d'ajout! vérifiez correctement les informations d'ajout: " . $stmt->error;
-        }
-
-        $stmt->close();
-        
+    if ($stmt->execute()) {
+        $_SESSION['success_message'] = "Ajout du matériel réussi.";
+    } else {
+        $_SESSION['error_message'] = "Erreur d'ajout ! Vérifiez correctement les informations d'ajout : " . $stmt->error;
     }
+
+    $stmt->close();
+
+}
+
+
 
 // Fermeture de la connexion à la base de données
 $conn->close();
@@ -58,7 +64,7 @@ $conn->close();
 
 <head>
     <meta charset="utf-8">
-    <title>Ajout de membres</title>
+    <title>Ajout de matériels</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         
 
@@ -103,6 +109,10 @@ $conn->close();
         }
         .form-container {
             border-radius: 15px;
+            
+        }
+        .form{
+            margin-bottom: 100px
         }
         
     </style>
@@ -173,28 +183,29 @@ $conn->close();
 </nav>
 
 
-    <div class="container-fluid  py-5 bg-hero" style="margin-bottom: 90px; background-color: rgb(118, 189, 12); " >
-        <div class="container py-5">
-            <div class="row justify-content-start">
-                <div class="col-lg-8 text-center text-lg-start">
-                    <strong class="display-1 text-warning">Ajouter des membres ici</strong>
-                    <p class="fs-4 text-warning mb-4">Vous pouvez enregistrer les membres de l'association sur cette page. 
-                    </p>
-                    <div class="pt-2">
-                        
-                    </div>
+<div class="container-fluid py-5 bg-hero" style="margin-bottom: 90px; background-color: rgb(118, 189, 12);">
+    <div class="container py-5">
+        <div class="row justify-content-start">
+            <div class="col-lg-8 text-center text-lg-start">
+                <strong class="display-1 text-warning">Ajouter des matériels ici</strong>
+                <p class="fs-4 text-warning mb-4">Vous pouvez enregistrer les matériels de l'association sur cette page.</p>
+                <div class="pt-2">
+                    <!-- Optionally, add buttons or additional information here if needed -->
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
         
     </div>
 
     <!-- formulaire start -->
     <div class="container">
-        <div class="row justify-content-center align-items-center vh-100">
+        <div class="row justify-content-center align-items-center vh-100 form">
             <div class="col-12 col-md-10 col-lg-8">
                 <div class="bg-primary p-5 m-3 form-container">
-                    <h2 class="text-center text-light mb-4">Ajout d'un membre</h2>
+                    <h2 class="text-center text-light mb-4">Ajout de Matériel</h2>
                     <?php
                     if (isset($_SESSION['error_message'])): ?>
                         <div class="alert alert-danger"><?php echo htmlspecialchars($_SESSION['error_message']); ?></div>
@@ -206,37 +217,53 @@ $conn->close();
                     <?php endif; ?>
                     <form action="" method="post">
                         <div class="row g-3">
-                            
-                            <div class="col-12 ">
+                            <div class="col-12">
                                 <input type="text" class="form-control bg-light border-0 py-3" name="nom" placeholder="Nom" required="required">
                             </div>
                             <div class="col-12">
-                                <input type="text" class="form-control bg-light border-0 py-3" name="prenom" placeholder="Prénom" required="required">
+                                <textarea class="form-control bg-light border-0 py-3" name="description" placeholder="Description"></textarea>
                             </div>
                             <div class="col-12 col-sm-6">
-                                <input type="text" class="form-control bg-light border-0 py-3" name="role" placeholder="Rôle ou Poste" required="required">
+                                <input type="text" class="form-control bg-light border-0 py-3" name="marque" placeholder="Marque">
                             </div>
                             <div class="col-12 col-sm-6">
-                                <input type="text" class="form-control bg-light border-0 py-3" name="telephone" placeholder="Numéro de téléphone">
+                                <input type="text" class="form-control bg-light border-0 py-3" name="modele" placeholder="Modèle">
                             </div>
                             <div class="col-12">
-                                <input type="text" class="form-control bg-light border-0 py-3" name="adresse" placeholder="Adresse" required="required">
+                                <input type="date" class="form-control bg-light border-0 py-3" name="date_achat">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <input type="number" class="form-control bg-light border-0 py-3" name="prix_achat" placeholder="Prix d'achat">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <select class="form-control bg-light border-0 py-3" name="etat" required="required">
+                                    <option value="" disabled selected>État</option>
+                                    <option value="neuf">Neuf</option>
+                                    <option value="bon">Bon</option>
+                                    <option value="réparable">Réparable</option>
+                                    <option value="hors service">Hors service</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <input type="text" class="form-control bg-light border-0 py-3" name="fournisseur" placeholder="Fournisseur">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <input type="text" class="form-control bg-light border-0 py-3" name="contact_fournisseur" placeholder="Contact Fournisseur">
                             </div>
                             <div class="col-12">
-                                <input type="email" class="form-control bg-light border-0 py-3" name="email" placeholder="Email" >
+                                <input type="number" class="form-control bg-light border-0 py-3" name="quantite" placeholder="Quantité">
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-secondary w-100 py-3" type="submit">Ajouter</button>
+                                <button class="btn btn-secondary w-100 py-3" type="submit">Ajouter Matériel</button>
                             </div>
-                            
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
     <!-- formulaire end -->
+
 
     <div class="container-fluid bg-dark bg-footer text-light py-5">
         <div class="container py-5">

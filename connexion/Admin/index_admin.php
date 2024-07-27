@@ -130,7 +130,7 @@ $conn->close();
                 </div>
                 <div class="col-md-6 text-center text-lg-end mb-2 mb-lg-0">
                     <div class="d-inline-flex align-items-center">
-                        <a href="logout.php" class="text-dark py-2 pe-3 border-start border-white px-3 text-white" style="display: flex;"> Déconnexion</a>
+                        <a href="../logout.php" class="text-dark py-2 pe-3 border-start border-white px-3 text-white" style="display: flex;"> Déconnexion</a>
                     </div>
                 </div>
             </div>
@@ -146,24 +146,24 @@ $conn->close();
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav ms-auto py-0 pe-4 border-end border-5 border-success">
-            <a href="#" class="nav-item nav-link active">Accueil</a>
+    <div class="navbar-nav ms-auto py-0 pe-4 border-end border-5 border-success">
+            <a href="index_admin.php" class="nav-item nav-link active">Accueil</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Ajouter</a>
                 <div class="dropdown-menu m-0">
                     <a href="ajout_membre.php" class="dropdown-item">Membres</a>
-                    <a href="#" class="dropdown-item">Materiels</a>
+                    <a href="ajout_materiel.php" class="dropdown-item">Materiels</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
                 <a href="service.php" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Liste</a>
                 <div class="dropdown-menu m-0">
-                    <a href="#" class="dropdown-item">Membres</a>
-                    <a href="#" class="dropdown-item">Materiels</a>
+                    <a href="liste_membre.php" class="dropdown-item">Membres</a>
+                    <a href="liste_materiel.php" class="dropdown-item">Materiels</a>
                 </div>
             </div>
             
-            <a href="contact.php"  class="nav-item nav-link">Messages</a>
+            <a href="message.php"  class="nav-item nav-link">Messages</a>
             
         </div>
         <a href="#">
@@ -232,13 +232,15 @@ $conn->close();
                     <p class="mb-0"style="color: white;"><i class="fa fa-phone-alt text-white me-3"></i>+225 07 09 30 45 39</p>
                 </div>
                 <div class="col-lg-3 col-md-6" >
-                    <h4 class="text-white">Nos service</h4>
+                    <h4 class="text-white">Liens rapides</h4>
                     <hr class="w-25 text-secondary mb-4" style="opacity: 1;">
                     <div class="d-flex flex-column justify-content-start">
-                        <a class="text-light mb-2" href="index.php"><i class="fa fa-angle-right me-2"></i>Accueil</a>
-                        <a class="text-light mb-2" href="présentation.php"><i class="fa fa-angle-right me-2"></i>présentation</a>
-                        <a class="text-light mb-2" href="prestation.php"><i class="fa fa-angle-right me-2"></i>prestation</a>
-                        <a class="text-light" href="contact.php"><i class="fa fa-angle-right me-2"></i>contact</a>
+                        <a class="text-light mb-2" href="ajout_membre.php"><i class="fa fa-angle-right me-2"></i>Ajout de membres</a>
+                        <a class="text-light mb-2" href="ajout_materiel.php"><i class="fa fa-angle-right me-2"></i>Enregistrer matériels</a>
+                        <a class="text-light mb-2" href="liste_membre.php"><i class="fa fa-angle-right me-2"></i>Membres</a>
+                        <a class="text-light" href="liste_materiel.php"><i class="fa fa-angle-right me-2"></i>Materiels</a>
+                        <a class="text-light" href="message.php"><i class="fa fa-angle-right me-2"></i>Messages</a>
+
                     </div>
                 </div>
                 
