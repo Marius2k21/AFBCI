@@ -99,6 +99,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'supprimer') {
 $conn->close();
 ?>
 
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -158,7 +159,7 @@ $conn->close();
 </style>
 
 <body>
-<div class="container-fluid  d-none d-lg-block" style="background-color: rgb(118, 189, 12);">
+    <div class="container-fluid  d-none d-lg-block" style="background-color: rgb(118, 189, 12);">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-lg-start">
@@ -229,153 +230,192 @@ $conn->close();
         </div>
     </div>
 
+    <div class="container py-5">
+        <h2 class="mb-4">Liste des membres</h2>
 
-    <div class="container mt-4">
-        <?php if (isset($_SESSION['success_message'])): ?>
-            <div class="alert alert-success">
-                <?= $_SESSION['success_message']; unset($_SESSION['success_message']); ?>
+        <!-- Barre de recherche -->
+        <form method="post" class="mb-4">
+            <div class="input-group">
+                <input type="text" class="form-control" name="recherche" placeholder="Rechercher par nom ou prénom" value="<?php echo htmlspecialchars($recherche); ?>">
+                <button class="btn btn-primary" type="submit">Rechercher</button>
             </div>
-        <?php endif; ?>
-        <?php if (isset($_SESSION['error_message'])): ?>
-            <div class="alert alert-danger">
-                <?= $_SESSION['error_message']; unset($_SESSION['error_message']); ?>
-            </div>
-        <?php endif; ?>
+        </form>
 
-        <div class="row mb-4">
-            <div class="col-12">
-                <h1 class="mb-4">Liste des membres</h1>
+        <!-- Tableau des membres -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Rôle</th>
+                    <th>Téléphone</th>
+                    <th>Adresse</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($ligne = $resultat->fetch_assoc()): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($ligne['nom']); ?></td>
+                    <td><?php echo htmlspecialchars($ligne['prenom']); ?></td>
+                    <td><?php echo htmlspecialchars($ligne['role']); ?></td>
+                    <td><?php echo htmlspecialchars($ligne['telephone']); ?></td>
+                    <td><?php echo htmlspecialchars($ligne['adresse']); ?></td>
+                    <td><?php echo htmlspecialchars($ligne['email']); ?></td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editModal" data-id="<?php echo $ligne['id']; ?>" data-nom="<?php echo htmlspecialchars($ligne['nom']); ?>" data-prenom="<?php echo htmlspecialchars($ligne['prenom']); ?>" data-role="<?php echo htmlspecialchars($ligne['role']); ?>" data-telephone="<?php echo htmlspecialchars($ligne['telephone']); ?>" data-adresse="<?php echo htmlspecialchars($ligne['adresse']); ?>" data-email="<?php echo htmlspecialchars($ligne['email']); ?>">Modifier</button>
+                        <button class="btn btn-danger btn-sm btn-delete" data-id="<?php echo $ligne['id']; ?>">Supprimer</button>
 
-                <form method="post" class="mb-4">
-                    <div class="input-group">
-                        <input type="text" name="recherche" class="form-control" placeholder="Rechercher par nom ou prénom" value="<?= htmlspecialchars($recherche); ?>">
-                        <button class="btn btn-primary" type="submit">Rechercher</button>
-                    </div>
-                </form>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
 
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Nom</th>
-                            <th>Prénom</th>
-                            <th>Role</th>
-                            <th>Téléphone</th>
-                            <th>Adresse</th>
-                            <th>Email</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while ($membre = $resultat->fetch_assoc()): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($membre['id']); ?></td>
-                                <td><?= htmlspecialchars($membre['nom']); ?></td>
-                                <td><?= htmlspecialchars($membre['prenom']); ?></td>
-                                <td><?= htmlspecialchars($membre['role']); ?></td>
-                                <td><?= htmlspecialchars($membre['telephone']); ?></td>
-                                <td><?= htmlspecialchars($membre['adresse']); ?></td>
-                                <td><?= htmlspecialchars($membre['email']); ?></td>
-                                <td>
-                                    <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modal-modifier" data-id="<?= htmlspecialchars($membre['id']); ?>" data-nom="<?= htmlspecialchars($membre['nom']); ?>" data-prenom="<?= htmlspecialchars($membre['prenom']); ?>" data-role="<?= htmlspecialchars($membre['role']); ?>" data-telephone="<?= htmlspecialchars($membre['telephone']); ?>" data-adresse="<?= htmlspecialchars($membre['adresse']); ?>" data-email="<?= htmlspecialchars($membre['email']); ?>">Modifier</a>
-                                    <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modal-supprimer" data-id="<?= htmlspecialchars($membre['id']); ?>">Supprimer</a>
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
-
-                <nav aria-label="Page navigation">
-                    <ul class="pagination">
-                        <li class="page-item <?= $page_courante <= 1 ? 'disabled' : ''; ?>">
-                            <a class="page-link" href="?page=<?= $page_courante - 1; ?>" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>
-                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                            <li class="page-item <?= $i == $page_courante ? 'active' : ''; ?>">
-                                <a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a>
-                            </li>
-                        <?php endfor; ?>
-                        <li class="page-item <?= $page_courante >= $total_pages ? 'disabled' : ''; ?>">
-                            <a class="page-link" href="?page=<?= $page_courante + 1; ?>" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li class="page-item <?php if ($page_courante <= 1) echo 'disabled'; ?>">
+                    <a class="page-link" href="?page=<?php echo $page_courante - 1; ?>" aria-label="Précédent">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
+                <li class="page-item <?php if ($i == $page_courante) echo 'active'; ?>">
+                    <a class="page-link" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                </li>
+                <?php endfor; ?>
+                <li class="page-item <?php if ($page_courante >= $total_pages) echo 'disabled'; ?>">
+                    <a class="page-link" href="?page=<?php echo $page_courante + 1; ?>" aria-label="Suivant">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 
     <!-- Modal Modifier -->
-    <div class="modal fade" id="modal-modifier" tabindex="-1" aria-labelledby="modalModifierLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalModifierLabel">Modifier membre</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="post">
-                        <input type="hidden" name="action" value="modifier">
-                        <input type="hidden" name="id" id="id-membre-modifier">
-                        <div class="mb-3">
-                            <label for="nom-modifier" class="form-label">Nom</label>
-                            <input type="text" class="form-control" id="nom-membre-modifier" name="nom" required>
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-light">
+                <h5 class="modal-title" id="editModalLabel">Modifier Membre</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <?php
+                if (isset($_SESSION['error_message'])): ?>
+                    <div class="alert alert-danger"><?php echo htmlspecialchars($_SESSION['error_message']); ?></div>
+                    <?php unset($_SESSION['error_message']); ?>
+                <?php endif; ?>
+                <?php if (isset($_SESSION['success_message'])): ?>
+                    <div class="alert alert-success"><?php echo htmlspecialchars($_SESSION['success_message']); ?></div>
+                    <?php unset($_SESSION['success_message']); ?>
+                <?php endif; ?>
+                <form id="editForm" action="" method="post">
+                    <input type="hidden" name="id" id="editId">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <input type="text" class="form-control bg-light border-0 py-3" id="editNom" name="nom" placeholder="Nom" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="prenom-modifier" class="form-label">Prénom</label>
-                            <input type="text" class="form-control" id="prenom-membre-modifier" name="prenom" required>
+                        <div class="col-12">
+                            <input type="text" class="form-control bg-light border-0 py-3" id="editPrenom" name="prenom" placeholder="Prénom" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="role-modifier" class="form-label">Role</label>
-                            <input type="text" class="form-control" id="role-membre-modifier" name="role" required>
+                        <div class="col-12 col-sm-6">
+                            <input type="text" class="form-control bg-light border-0 py-3" id="editRole" name="role" placeholder="Rôle ou Poste" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="telephone-modifier" class="form-label">Téléphone</label>
-                            <input type="text" class="form-control" id="telephone-membre-modifier" name="telephone" required>
+                        <div class="col-12 col-sm-6">
+                            <input type="text" class="form-control bg-light border-0 py-3" id="editTelephone" name="telephone" placeholder="Numéro de téléphone">
                         </div>
-                        <div class="mb-3">
-                            <label for="adresse-modifier" class="form-label">Adresse</label>
-                            <input type="text" class="form-control" id="adresse-membre-modifier" name="adresse" required>
+                        <div class="col-12">
+                            <input type="text" class="form-control bg-light border-0 py-3" id="editAdresse" name="adresse" placeholder="Adresse" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="email-modifier" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email-membre-modifier" name="email" required>
+                        <div class="col-12">
+                            <input type="email" class="form-control bg-light border-0 py-3" id="editEmail" name="email" placeholder="Email">
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                        <div class="col-12">
+                            <button class="btn btn-secondary w-100 py-3" type="submit">Enregistrer</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
     <!-- Modal Supprimer -->
-    <div class="modal fade" id="modal-supprimer" tabindex="-1" aria-labelledby="modalSupprimerLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalSupprimerLabel">Supprimer membre</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form method="post">
-                        <input type="hidden" name="action" value="supprimer">
-                        <input type="hidden" name="id_membre" id="id-membre-supprimer">
-                        <p>Êtes-vous sûr de vouloir supprimer ce membre ?</p>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn btn-danger">Supprimer</button>
-                        </div>
-                    </form>
-                </div>
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModalLabel">Supprimer Membre</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Êtes-vous sûr de vouloir supprimer ce membre ?</p>
+            </div>
+            <div class="modal-footer">
+                <form id="deleteForm" method="post" action="liste_membre.php">
+                    <input type="hidden" name="action" value="supprimer">
+                    <input type="hidden" name="id_membre" id="deleteId">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
+
+    <!-- JavaScript pour le modal Modifier -->
+    <script>
+    var editModal = document.getElementById('editModal');
+    editModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget; // Button that triggered the modal
+        var id = button.getAttribute('data-id');
+        var nom = button.getAttribute('data-nom');
+        var prenom = button.getAttribute('data-prenom');
+        var role = button.getAttribute('data-role');
+        var telephone = button.getAttribute('data-telephone');
+        var adresse = button.getAttribute('data-adresse');
+        var email = button.getAttribute('data-email');
+
+        var modal = editModal.querySelector('#editId');
+        var modalNom = editModal.querySelector('#editNom');
+        var modalPrenom = editModal.querySelector('#editPrenom');
+        var modalRole = editModal.querySelector('#editRole');
+        var modalTelephone = editModal.querySelector('#editTelephone');
+        var modalAdresse = editModal.querySelector('#editAdresse');
+        var modalEmail = editModal.querySelector('#editEmail');
+
+        modal.value = id;
+        modalNom.value = nom;
+        modalPrenom.value = prenom;
+        modalRole.value = role;
+        modalTelephone.value = telephone;
+        modalAdresse.value = adresse;
+        modalEmail.value = email;
+    });
+</script>
+
+<script>
+    // Fonction pour ouvrir le modal et définir l'ID du membre à supprimer
+    function openDeleteModal(id) {
+        var deleteIdInput = document.getElementById('deleteId');
+        deleteIdInput.value = id;
+        var deleteModal = new bootstrap.Modal(document.getElementById('deleteModal'));
+        deleteModal.show();
+    }
+
+    // Exemple de code pour lier la fonction à un bouton
+    document.querySelectorAll('.btn-delete').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var id = this.getAttribute('data-id');
+            openDeleteModal(id);
+        });
+    });
+</script>
 
 
     <div class="container-fluid bg-dark bg-footer text-light py-5">
@@ -428,30 +468,11 @@ $conn->close();
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var modalModifier = document.getElementById('modal-modifier');
-            var modalSupprimer = document.getElementById('modal-supprimer');
-
-            modalModifier.addEventListener('show.bs.modal', function(event) {
-                var button = event.relatedTarget;
-                document.getElementById('id-membre-modifier').value = button.getAttribute('data-id');
-                document.getElementById('nom-membre-modifier').value = button.getAttribute('data-nom');
-                document.getElementById('prenom-membre-modifier').value = button.getAttribute('data-prenom');
-                document.getElementById('role-membre-modifier').value = button.getAttribute('data-role');
-                document.getElementById('telephone-membre-modifier').value = button.getAttribute('data-telephone');
-                document.getElementById('adresse-membre-modifier').value = button.getAttribute('data-adresse');
-                document.getElementById('email-membre-modifier').value = button.getAttribute('data-email');
-            });
-
-            modalSupprimer.addEventListener('show.bs.modal', function(event) {
-                var button = event.relatedTarget;
-                document.getElementById('id-membre-supprimer').value = button.getAttribute('data-id');
-            });
-        });
-    </script>
+    <a href="#" class="btn btn-lg btn-secondary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
 </body>
 </html>

@@ -189,7 +189,7 @@ $conn->close();
         
     </div>
 
-    <!-- Section d'Informations sur le Paiement -->
+    <!-- Section Liste des tâches -->
     <div class="container py-5">
         <div class="row">
             <div class="col-lg-12 mb-4">
@@ -217,7 +217,7 @@ $conn->close();
             </div>
         </div>
     </div>
-    <!-- Section d'Informations sur le Paiement End -->
+    <!-- Section Liste des tâches End -->
 
     <div class="container-fluid bg-dark bg-footer text-light py-5">
         <div class="container py-5">

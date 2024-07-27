@@ -37,9 +37,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contact_fournisseur = $_POST['contact_fournisseur'];
     $quantite = $_POST['quantite'];
 
+    // Traitement de l'image
+    if (isset($_FILES['photo_materiel']) && $_FILES['photo_materiel']['error'] == 0) {
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        if (!in_array($_FILES['photo_materiel']['type'], $allowedTypes)) {
+            $_SESSION['error_message'] = "Type de fichier non autorisé.";
+            header("Location: inscription.php");
+            exit();
+        }
+
+        $uploadDir = 'materiels/';
+        $uploadFile = $uploadDir . basename($_FILES['photo_materiel']['name']);
+        
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+
+        if (move_uploaded_file($_FILES['photo_materiel']['tmp_name'], $uploadFile)) {
+            $photo_materiel = $uploadFile;
+        } else {
+            $_SESSION['error_message'] = "Erreur lors du téléchargement de la photo.";
+            header("Location: inscription.php");
+            exit();
+        }
+    } else {
+        $photo_materiel = null;
+    }
+
     // Insertion des données dans la base de données
-    $stmt = $conn->prepare("INSERT INTO materiels (nom, description, marque, modele, date_achat, prix_achat, etat, fournisseur, contact_fournisseur, quantite) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssisisi", $nom, $description, $marque, $modele, $date_achat, $prix_achat, $etat, $fournisseur, $contact_fournisseur, $quantite);
+    $stmt = $conn->prepare("INSERT INTO materiels (nom, description, marque, modele, date_achat, prix_achat, etat, fournisseur, contact_fournisseur, quantite, photo_materiel) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssisssis", $nom, $description, $marque, $modele, $date_achat, $prix_achat, $etat, $fournisseur, $contact_fournisseur, $quantite, $photo_materiel);
 
     if ($stmt->execute()) {
         $_SESSION['success_message'] = "Ajout du matériel réussi.";
@@ -112,7 +139,7 @@ $conn->close();
             
         }
         .form{
-            margin-bottom: 100px
+            margin-bottom: 200px;
         }
         
     </style>
@@ -215,7 +242,7 @@ $conn->close();
                         <div class="alert alert-success"><?php echo htmlspecialchars($_SESSION['success_message']); ?></div>
                         <?php unset($_SESSION['success_message']); ?>
                     <?php endif; ?>
-                    <form action="" method="post">
+                    <form action="" method="post" enctype="multipart/form-data">
                         <div class="row g-3">
                             <div class="col-12">
                                 <input type="text" class="form-control bg-light border-0 py-3" name="nom" placeholder="Nom" required="required">
@@ -229,8 +256,13 @@ $conn->close();
                             <div class="col-12 col-sm-6">
                                 <input type="text" class="form-control bg-light border-0 py-3" name="modele" placeholder="Modèle">
                             </div>
-                            <div class="col-12">
+                            <div class="col-12 col-sm-6">
+                                <label for="achat" class="form-label text-light">Date d'Achat</label>
                                 <input type="date" class="form-control bg-light border-0 py-3" name="date_achat">
+                            </div>
+                            <div class="col-12 col-sm-6">
+                                <label for="photo" class="form-label text-light">Photo</label>
+                                <input type="file" class="form-control bg-light border-0 py-3" id="photo" name="photo_materiel" required="required">
                             </div>
                             <div class="col-12 col-sm-6">
                                 <input type="number" class="form-control bg-light border-0 py-3" name="prix_achat" placeholder="Prix d'achat">
