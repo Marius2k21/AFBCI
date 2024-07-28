@@ -133,31 +133,9 @@ $conn->close();
         height: 100px;
         object-fit: cover;
     }
-    .info-box {
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        padding: 20px;
-        border-radius: 10px;
-        margin-bottom: 20px;
-    }
-    .info-box h4 {
-        color: #76BD0C;
-    }
-    .info-box ul {
-        list-style-type: none;
-        padding-left: 0;
-    }
-    .info-box ul li {
-        padding: 10px 0;
-        border-bottom: 1px solid #ddd;
-    }
-    .info-box ul li:last-child {
-        border-bottom: none;
-    }
-    .info-box ul li i {
-        color: #76BD0C;
-        margin-right: 10px;
-    }
+    .search-box {
+            margin-bottom: 20px;
+        }
 </style>
 
 <body>
@@ -249,14 +227,17 @@ $conn->close();
             <div class="col-12">
                 <h1 class="mb-4">Liste des membres</h1>
 
-                <form method="post" class="mb-4">
+                <!-- <form method="post" class="mb-4">
                     <div class="input-group">
                         <input type="text" name="recherche" class="form-control" placeholder="Rechercher par nom ou prénom" value="<?= htmlspecialchars($recherche); ?>">
                         <button class="btn btn-primary" type="submit">Rechercher</button>
                     </div>
-                </form>
+                </form> -->
+                <div class="search-box">
+                    <input type="text" id="searchInput" class="form-control" placeholder="Rechercher">
+                </div>
 
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="tableau_membre">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -458,6 +439,29 @@ $conn->close();
                 var button = event.relatedTarget;
                 document.getElementById('id-membre-supprimer').value = button.getAttribute('data-id');
             });
+        });
+
+        // Search Functionality
+            document.getElementById('searchInput').addEventListener('keyup', function () {
+            var input, filter, table, tr, td, i, j, txtValue;
+            input = document.getElementById('searchInput');
+            filter = input.value.toUpperCase();
+            table = document.getElementById('tableau_membre');
+            tr = table.getElementsByTagName('tr');
+
+            for (i = 1; i < tr.length; i++) {
+                tr[i].style.display = 'none';
+                td = tr[i].getElementsByTagName('td');
+                for (j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = '';
+                            break;
+                        }
+                    }
+                }
+            }
         });
     </script>
 </body>
