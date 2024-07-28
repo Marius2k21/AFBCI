@@ -63,10 +63,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->Port = 587;
 
             // Paramètres de l'email
-            $mail->setFrom('iuainscandpay@gmail.com', 'Service Client');
+            $mail->setFrom('iuainscandpay@gmail.com', 'AFBCI');
             $mail->addAddress($recipient_email);
             $mail->isHTML(true);
-            $mail->Subject = 'Réponse à votre message';
+            $mail->Subject = 'Reponse a votre message';
             $mail->Body = '
                 <body style="font-family: Poppins, Arial, sans-serif">
                     <div class="container">
@@ -74,13 +74,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="col-md-10">
                                 <table class="table table-bordered" style="background-color: #ffffff; margin-top: 20px; max-width: 600px; margin: auto;">
                                     <tr>
-                                        <td class="header" style="background-color: #07c5ff; padding: 40px; text-align: center; color: white; font-size: 24px;">
-                                            Institut Universitaire d\'Abidjan
+                                        <td class="header" style="background-color: #8CC641; padding: 40px; text-align: center; color: white; font-size: 24px;">
+                                            Association des femmes balayeuses de Côte d\'Ivoire
                                         </td>
                                     </tr>
                                     <tr>
                                         <td class="body" style="padding: 40px; text-align: left; font-size: 16px; line-height: 1.6;">
-                                            Cher/Chère Étudiant(e) ou Parent,
+                                            Cher Utilisateur,
                                             <br><br>
                                             Voici la réponse à votre message :
                                             <br><br>
@@ -88,8 +88,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="footer" style="background-color: #07c5ff; padding: 40px; text-align: center; color: white; font-size: 14px;">
-                                            Copyright &copy; 2024 | IUA
+                                        <td class="footer" style="background-color: #8CC641; padding: 40px; text-align: center; color: white; font-size: 14px;">
+                                            Copyright &copy; 2024 | Société AFBCI
                                         </td>
                                     </tr>
                                 </table>
@@ -101,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->send(); // Envoi de l'email
 
             // Préparation de la requête SQL pour supprimer le message après réponse
-            $sql = "DELETE FROM messages WHERE id_mess = '$message_id'";
+            $sql = "DELETE FROM message WHERE id = '$message_id'";
             if ($conn->query($sql) === TRUE) {
                 $message = "Réponse envoyée avec succès!"; // Message de succès en cas d'envoi réussi
             } else {
@@ -265,7 +265,7 @@ $conn->close(); // Fermeture de la connexion à la base de données
                 <td><?php echo htmlspecialchars($row['nom_prenom']); ?></td>
                 <td><?php echo htmlspecialchars($row['email']); ?></td>
                 <td><?php echo htmlspecialchars($row['sujet']); ?></td>
-                <td><?php echo htmlspecialchars($row['message']); ?></td>
+                <td style="max-width: 300px; word-wrap: break-word; overflow-wrap: break-word;"> <?php echo htmlspecialchars($row['message']); ?></td>
                 <td>
                     <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#replyModal" data-email="<?php echo htmlspecialchars($row['email']); ?>" data-id="<?php echo htmlspecialchars($row['id']); ?>">Répondre</button>
                     <form method="POST" action="" style="display:inline;">
