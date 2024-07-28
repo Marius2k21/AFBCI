@@ -100,99 +100,99 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
 
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm px-5 py-3 py-lg-0" >
-    <a href="index.php" class="navbar-brand p-0">
-        <h1 class="m-0 text-uppercase text-white"><img style="width: 90px; height: auto;" src="img/logo.jpg" alt=""></h1>
-    </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav ms-auto py-0 pe-4 border-end border-5 border-success">
-            <a href="index.php" class="nav-item nav-link ">Accueil</a>
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Présentation</a>
-                <div class="dropdown-menu m-0">
-                    <a href="présentation.php#Historique" class="dropdown-item">Historique</a>
-                    <a href="présentation.php#Mission" class="dropdown-item">Mission</a>
-                    <a href="présentation.php#Membres" class="dropdown-item">Membres</a>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm px-5 py-3 py-lg-0" >
+        <a href="index.php" class="navbar-brand p-0">
+            <h1 class="m-0 text-uppercase text-white"><img style="width: 90px; height: auto;" src="img/logo.jpg" alt=""></h1>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav ms-auto py-0 pe-4 border-end border-5 border-success">
+                <a href="index.php" class="nav-item nav-link ">Accueil</a>
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Présentation</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="présentation.php#Historique" class="dropdown-item">Historique</a>
+                        <a href="présentation.php#Mission" class="dropdown-item">Mission</a>
+                        <a href="présentation.php#Membres" class="dropdown-item">Membres</a>
+                    </div>
                 </div>
-            </div>
-            <div class="nav-item dropdown">
-                <a href="service.php" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Prestations</a>
-                <div class="dropdown-menu m-0">
-                    <a href="prestation.php#Details" class="dropdown-item">Details</a>
-                    <a href="prestation.php#Activités" class="dropdown-item">Activités</a>
+                <div class="nav-item dropdown">
+                    <a href="service.php" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Prestations</a>
+                    <div class="dropdown-menu m-0">
+                        <a href="prestation.php#Details" class="dropdown-item">Details</a>
+                        <a href="prestation.php#Activités" class="dropdown-item">Activités</a>
+                    </div>
                 </div>
+                
+                
+                
+                <a href="contact.php"  class="nav-item nav-link active">Contact</a>
             </div>
-            
-            
-            
-            <a href="contact.php"  class="nav-item nav-link active">Contact</a>
+                <a href="connexion/code_admin_login.php"  class="nav-item nav-link">Se connecter</a>
+                <a href="connexion/code_admin_signup.php"  class="nav-item nav-link">S'inscrire</a>
         </div>
-            <a href="connexion/code_admin_login.php"  class="nav-item nav-link">Se connecter</a>
-            <a href="connexion/code_admin_signup.php"  class="nav-item nav-link">S'inscrire</a>
+    </nav>
+
+
+    <div class="container-fluid  py-5 bg-hero" style="margin-bottom: 90px; background-color: rgb(118, 189, 12);" >
+        <div class="container py-5">
+            <div class="row justify-content-start">
+                <div class="col-lg-8 text-center text-lg-start">
+                    <strong class="display-1 text-warning">Contactez-nous</strong>
+                    <p class="fs-4 text-warning mb-4">N'hésitez pas à nous faire part de vos problèmes pour qu'ensemble, nous éssayons de les résoudres.</p>
+                    <div class="pt-2">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</nav>
 
-
-<div class="container-fluid  py-5 bg-hero" style="margin-bottom: 90px; background-color: rgb(118, 189, 12);" >
-    <div class="container py-5">
-        <div class="row justify-content-start">
-            <div class="col-lg-8 text-center text-lg-start">
-                <strong class="display-1 text-warning">Contactez-nous</strong>
-                <p class="fs-4 text-warning mb-4">N'hésitez pas à nous faire part de vos problèmes pour qu'ensemble, nous éssayons de les résoudres.</p>
-                <div class="pt-2">
-                    
-                </div>
+    <div class="container-fluid py-5" id="con" >
+        <div class="container-fluid py-5">
+            <div class="text-center mx-auto mb-5" style="max-width: 500px;">
+                <h1 class="display-5">N’hésitez pas à nous contacter</h1>
+                <hr class="w-25 mx-auto text-primary" style="opacity: 1;">
             </div>
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid py-5" id="con" >
-    <div class="container-fluid py-5">
-        <div class="text-center mx-auto mb-5" style="max-width: 500px;">
-            <h1 class="display-5">N’hésitez pas à nous contacter</h1>
-            <hr class="w-25 mx-auto text-primary" style="opacity: 1;">
-        </div>
-        <div class="row g-3 mb-5">
-            <div class="col-lg-4 col-md-6 pt-5">
-                <div class="contact-item d-flex flex-column align-items-center justify-content-center text-center pb-5">
-                    <div class="contact-icon p-3">
-                        <div><i class="fa fa-2x fa-map-marker-alt"style=" color: red;"></i></div>
+            <div class="row g-3 mb-5">
+                <div class="col-lg-4 col-md-6 pt-5">
+                    <div class="contact-item d-flex flex-column align-items-center justify-content-center text-center pb-5">
+                        <div class="contact-icon p-3">
+                            <div><i class="fa fa-2x fa-map-marker-alt"style=" color: red;"></i></div>
+                        </div>
+                        <h4 class="mt-5 text-white">Riviera 4 les jardins d'eden</h4>
                     </div>
-                    <h4 class="mt-5 text-white">Riviera 4 les jardins d'eden</h4>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 pt-5">
-                <div class="contact-item d-flex flex-column align-items-center justify-content-center text-center pb-5">
-                    <div class="contact-icon p-3">
-                        <div><i class="fa fa-2x fa-phone" style=" color: red;"></i></div>
+                <div class="col-lg-4 col-md-6 pt-5">
+                    <div class="contact-item d-flex flex-column align-items-center justify-content-center text-center pb-5">
+                        <div class="contact-icon p-3">
+                            <div><i class="fa fa-2x fa-phone" style=" color: red;"></i></div>
+                        </div>
+                        <h4 class="mt-5 text-white">+225 07 08 63 76 04</h4>
                     </div>
-                    <h4 class="mt-5 text-white">+225 07 08 63 76 04</h4>
                 </div>
-            </div>
-            <div class="col-lg-4 col-md-6 pt-5">
-                <div class="contact-item d-flex flex-column align-items-center justify-content-center text-center pb-5">
-                    <div class="contact-icon p-3">
-                        <div><i class="fa fa-2x fa-envelope-open" style=" color: red;"></i></div>
+                <div class="col-lg-4 col-md-6 pt-5">
+                    <div class="contact-item d-flex flex-column align-items-center justify-content-center text-center pb-5">
+                        <div class="contact-icon p-3">
+                            <div><i class="fa fa-2x fa-envelope-open" style=" color: red;"></i></div>
+                        </div>
+                        <h4 class="mt-5 text-white"><span style="font-size: 20px;"> associationfemmesbalayeusesci@gmail.com </span></h4>
                     </div>
-                    <h4 class="mt-5 text-white"><span style="font-size: 20px;"> associationfemmesbalayeusesci@gmail.com </span></h4>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12" style="height: 500px;">
-                <div class="position-relative h-100">
+            <div class="row">
+                <div class="col-12" style="height: 500px;">
+                    <div class="position-relative h-100">
 
-                    <iframe class="position-relative w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3299.1226089715838!2d-3.9424014889367927!3d5.3277605318434444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1ed1aaf2cb191%3A0x1784f82f89499992!2sCit%C3%A9%20Eden!5e0!3m2!1sen!2sci!4v1682799772501!5m2!1sen!2sci" 
-                    frameborder="0" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-hidden="false" tabindex="0"></iframe>
+                        <iframe class="position-relative w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3299.1226089715838!2d-3.9424014889367927!3d5.3277605318434444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1ed1aaf2cb191%3A0x1784f82f89499992!2sCit%C3%A9%20Eden!5e0!3m2!1sen!2sci!4v1682799772501!5m2!1sen!2sci" 
+                        frameborder="0" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-hidden="false" tabindex="0"></iframe>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="row justify-content-center position-relative" style="margin-top: -200px; z-index: 1;">
+            
+            <div class="row justify-content-center position-relative" style="border-radius: 15px;">
                 <div class="col-lg-8">
                     <div class="bg-primary p-5 m-5 mb-0">
                     <h2 class="text-center text-light mb-4">Envoyer un méssage</h2>
@@ -214,7 +214,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <input type="text" class="form-control bg-light border-0" required="required" name="sujet" placeholder="Sujet" style="height: 55px;">
                                 </div>
                                 <div class="col-12">
-                                    <textarea class="form-control bg-light border-0" rows="5" required="required" name="message" placeholder="Message"></textarea>
+                                    <textarea class="form-control bg-light border-0" rows="5" required="required" name="message"  placeholder="Message"></textarea>
                                 </div>
                                 <div class="col-12">
                                     <button class="btn btn-secondary w-100 py-3" type="submit">Envoyer</button>
@@ -224,8 +224,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                 </div>
             </div>
+        </div>
     </div>
-</div>
 
 
 
