@@ -60,6 +60,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         $stmt->close();
+
+        // Redirection pour éviter la resoumission du formulaire
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit();
         $conn->close();
     }
 }

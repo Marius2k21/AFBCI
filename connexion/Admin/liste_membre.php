@@ -25,7 +25,7 @@ if ($result->num_rows == 1) {
 }
 
 // Pagination
-$elements_par_page = 10; // Nombre d'éléments par page
+$elements_par_page = 8; // Nombre d'éléments par page
 $page_courante = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page_courante - 1) * $elements_par_page;
 
@@ -39,6 +39,7 @@ $param_recherche = "%$recherche%";
 $stmt->bind_param("ssii", $param_recherche, $param_recherche, $elements_par_page, $offset);
 $stmt->execute();
 $resultat = $stmt->get_result();
+
 
 // Récupérer le nombre total de membres pour la pagination
 $sql_count = "SELECT COUNT(*) as total FROM membre WHERE nom LIKE ? OR prenom LIKE ?";
@@ -93,7 +94,9 @@ if (isset($_POST['action']) && $_POST['action'] === 'supprimer') {
     // Redirection après la suppression
     header("Location: liste_membre.php");
     exit();
+
 }
+
 
 // Fermeture de la connexion à la base de données
 $conn->close();

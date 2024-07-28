@@ -14,13 +14,12 @@ $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 
 // Définir les en-têtes de colonnes
-$sheet->setCellValue('A1', 'ID');
-$sheet->setCellValue('B1', 'Nom');
-$sheet->setCellValue('C1', 'Prénom');
-$sheet->setCellValue('D1', 'Role');
-$sheet->setCellValue('E1', 'Téléphone');
-$sheet->setCellValue('F1', 'Adresse');
-$sheet->setCellValue('G1', 'Email');
+$sheet->setCellValue('A1', 'Nom');
+$sheet->setCellValue('B1', 'Prénom');
+$sheet->setCellValue('C1', 'Role');
+$sheet->setCellValue('D1', 'Téléphone');
+$sheet->setCellValue('E1', 'Adresse');
+$sheet->setCellValue('F1', 'Email');
 
 // Récupérer les données des membres
 $query = "SELECT * FROM membre";
@@ -28,13 +27,12 @@ $resultat = $conn->query($query);
 
 $rowNumber = 2;
 while ($membre = $resultat->fetch_assoc()) {
-    $sheet->setCellValue('A' . $rowNumber, $membre['id']);
-    $sheet->setCellValue('B' . $rowNumber, $membre['nom']);
-    $sheet->setCellValue('C' . $rowNumber, $membre['prenom']);
-    $sheet->setCellValue('D' . $rowNumber, $membre['role']);
-    $sheet->setCellValue('E' . $rowNumber, $membre['telephone']);
-    $sheet->setCellValue('F' . $rowNumber, $membre['adresse']);
-    $sheet->setCellValue('G' . $rowNumber, $membre['email']);
+    $sheet->setCellValue('A' . $rowNumber, $membre['nom']);
+    $sheet->setCellValue('B' . $rowNumber, $membre['prenom']);
+    $sheet->setCellValue('C' . $rowNumber, $membre['role']);
+    $sheet->setCellValue('D' . $rowNumber, $membre['telephone']);
+    $sheet->setCellValue('E' . $rowNumber, $membre['adresse']);
+    $sheet->setCellValue('F' . $rowNumber, $membre['email']);
     $rowNumber++;
 }
 

@@ -1,3 +1,32 @@
+<?php
+// Vérifie si la méthode de la requête HTTP est POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    include("Connexion/connexion.php");
+
+    // Sécurisation des données entrantes en utilisant la méthode real_escape_string pour éviter les injections SQL
+    $nom_mess = $conn->real_escape_string($_POST['nom_prenom']); // Nom de l'expéditeur
+    $mail_mess = $conn->real_escape_string($_POST['email']); // Email de l'expéditeur
+    $sujet_mess = $conn->real_escape_string($_POST['sujet']); // Sujet du message
+    $contenu_mess = $conn->real_escape_string($_POST['message']); // Contenu du message
+
+    // Préparation de la requête SQL pour insérer les données du message dans la base de données
+    $sql = "INSERT INTO message (nom_prenom, email, sujet, message) VALUES ('$nom_mess', '$mail_mess', '$sujet_mess', '$contenu_mess')";
+
+    // Exécution de la requête SQL
+    if ($conn->query($sql) === TRUE) {
+        $success_message =  "Message envoyé avec succès!"; // Stockage d'un message de succès en cas de succès de l'insertion
+    } else {
+        $error_message = "Erreur : " . $sql . "<br>" . $conn->error; // Stockage d'un message d'erreur en cas d'échec de l'insertion
+    }
+
+    // Redirection pour éviter la resoumission du formulaire
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+    // Fermeture de la connexion à la base de données
+    $conn->close();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -156,10 +185,6 @@
         <div class="row">
             <div class="col-12" style="height: 500px;">
                 <div class="position-relative h-100">
-                    <!-- <iframe class="position-relative w-100 h-100" 
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1160.4256213872188!2d8.636897976817473!3d49.29413311880295!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4797beac4fc96d5f%3A0x909f3de31b1264b!2sSAP%20Germany%20SE%20%26%20Co.%20KG%20(WDF21)!5e1!3m2!1sen!2sci!4v1652979662084!5m2!1sen!2sci" 
-                    frameborder="0" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" 
-                    aria-hidden="false" tabindex="0"></iframe> -->
 
                     <iframe class="position-relative w-100 h-100" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3299.1226089715838!2d-3.9424014889367927!3d5.3277605318434444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc1ed1aaf2cb191%3A0x1784f82f89499992!2sCit%C3%A9%20Eden!5e0!3m2!1sen!2sci!4v1682799772501!5m2!1sen!2sci" 
                     frameborder="0" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" aria-hidden="false" tabindex="0"></iframe>
@@ -170,19 +195,26 @@
         <div class="row justify-content-center position-relative" style="margin-top: -200px; z-index: 1;">
                 <div class="col-lg-8">
                     <div class="bg-primary p-5 m-5 mb-0">
-                        <form>
+                    <h2 class="text-center text-light mb-4">Envoyer un méssage</h2>
+                    <?php
+                    if (isset($success_message)): ?>
+                        <div class="alert alert-success"><?php echo $success_message; ?></div>
+                    <?php elseif (isset($error_message)): ?>
+                        <div class="alert alert-danger"><?php echo $error_message; ?></div>
+                    <?php endif; ?>
+                        <form action="" method="POST">
                             <div class="row g-3">
                                 <div class="col-12 col-sm-6">
-                                    <input type="text" class="form-control bg-light border-0" placeholder="VotreNom" style="height: 55px;">
+                                    <input type="text" class="form-control bg-light border-0" required="required" name="nom_prenom" placeholder="Nom et prénom" style="height: 55px;">
                                 </div>
                                 <div class="col-12 col-sm-6">
-                                    <input type="email" class="form-control bg-light border-0" placeholder="Votre E-mail" style="height: 55px;">
+                                    <input type="email" class="form-control bg-light border-0" required="required" name="email" placeholder="Votre E-mail" style="height: 55px;">
                                 </div>
                                 <div class="col-12">
-                                    <input type="text" class="form-control bg-light border-0" placeholder="Sujet" style="height: 55px;">
+                                    <input type="text" class="form-control bg-light border-0" required="required" name="sujet" placeholder="Sujet" style="height: 55px;">
                                 </div>
                                 <div class="col-12">
-                                    <textarea class="form-control bg-light border-0" rows="5" placeholder="Message"></textarea>
+                                    <textarea class="form-control bg-light border-0" rows="5" required="required" name="message" placeholder="Message"></textarea>
                                 </div>
                                 <div class="col-12">
                                     <button class="btn btn-secondary w-100 py-3" type="submit">Envoyer</button>
