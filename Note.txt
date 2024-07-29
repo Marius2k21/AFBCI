@@ -1,15 +1,6 @@
 Acteur*
 
--Admin:
-	Enregistrer des balayeuses
-	Voir la Liste des balayeuses
-	Enregistrer le materiel
-	voir la liste des matériels
-	recevoir les messages des visiteurs
-
 devadmin:
 	Voir le nombre de visiteur
 	Ajouter un admin
 
-visiteur:
-	Enoyer un message à l'admin
