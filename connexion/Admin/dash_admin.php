@@ -42,6 +42,7 @@ $conn->close();
             width: 150px;
             height: 150px;
             object-fit: cover;
+            cursor: pointer;
         }
         .dashboard-container {
             margin-top: 20px;

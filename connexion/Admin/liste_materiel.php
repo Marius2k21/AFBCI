@@ -157,9 +157,10 @@ $conn->close();
 <style>
         .profile-photo {
             border-radius: 50%;
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             object-fit: cover;
+            cursor: pointer;
 
         }
         .form-container {
@@ -241,7 +242,7 @@ $conn->close();
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Ajouter</a>
                     <div class="dropdown-menu m-0">
-                        <a href="#" class="dropdown-item">Membres</a>
+                        <a href="ajout_membre.php" class="dropdown-item">Membres</a>
                         <a href="ajout_materiel.php" class="dropdown-item">Materiels</a>
                     </div>
                 </div>

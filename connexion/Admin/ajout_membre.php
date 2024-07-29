@@ -11,7 +11,7 @@ if (!isset($_SESSION['id_admin'])) {
 $id_admin = $_SESSION['id_admin'];
 
 // Préparation et exécution de la requête SQL pour obtenir les informations de l'administrateur
-$sql = "SELECT email_admin, nom_admin, prenom_admin, photo_admin FROM administrateur WHERE id_admin=?";
+$sql = "SELECT * FROM administrateur WHERE id_admin=?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $id_admin);
 $stmt->execute();
@@ -23,7 +23,89 @@ if ($result->num_rows == 1) {
     echo "Veullez vous connecter.";
     exit();
 }
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+if (isset($_POST['modifier'])) {
+    $identifiant = $_POST['identifiant'];
+    $nom_admin = $_POST['nom_admin'];
+    $prenom_admin = $_POST['prenom_admin'];
+    $email_admin = $_POST['email_admin'];
+    $numero_admin = $_POST['numero_admin'];
+
+    // Vérification et traitement de l'image
+    if (isset($_FILES['photo']) && $_FILES['photo']['error'] == 0) {
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        if (!in_array($_FILES['photo']['type'], $allowedTypes)) {
+            $_SESSION['error_message'] = "Type de fichier non autorisé.";
+            header("Location: index_admin.php");
+            exit();
+        }
+
+        $uploadDir = 'uploads/';
+        $uploadFile = $uploadDir . basename($_FILES['photo']['name']);
+
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0755, true);
+        }
+
+        if (move_uploaded_file($_FILES['photo']['tmp_name'], $uploadFile)) {
+            $photo_admin = $uploadFile;
+        } else {
+            $_SESSION['error_message'] = "Erreur lors du téléchargement de la photo.";
+            header("Location: index_admin.php");
+            exit();
+        }
+    } else {
+        $photo_admin = $admin['photo_admin']; // Conserver l'ancienne photo si aucune nouvelle n'est téléchargée
+    }
+
+    // Mise à jour des informations de l'administrateur dans la base de données
+    $stmt = $conn->prepare("UPDATE administrateur SET identifiant=?, nom_admin=?, prenom_admin=?, email_admin=?, numero_admin=?, photo_admin=? WHERE id_admin=?");
+    $stmt->bind_param("ssssssi", $identifiant, $nom_admin, $prenom_admin, $email_admin, $numero_admin, $photo_admin, $id_admin);
+
+    if ($stmt->execute()) {
+        $_SESSION['success_message'] = "Profil mis à jour avec succès.";
+        header("Location: index_admin.php");
+        exit();
+    } else {
+        $_SESSION['error_message'] = "Erreur: " . $stmt->error;
+    }
+
+    $stmt->close();
+}
+
+
+
+
+// Suppression d'un matériel
+if (isset($_POST['delete_id'])) {
+    $delete_id = $_POST['delete_id'];
+
+    // Supprimer la photo du serveur
+    $sql = "SELECT photo_materiel FROM materiels WHERE id=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $delete_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $materiel = $result->fetch_assoc();
+    if ($materiel && !empty($materiel['photo_materiel']) && file_exists($materiel['photo_materiel'])) {
+        unlink($materiel['photo_materiel']);
+    }
+
+
+    // Supprimer le matériel de la base de données
+    $sql = "DELETE FROM materiels WHERE id=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $delete_id);
+    $stmt->execute();
+
+    $_SESSION['success_message'] = "Matériel supprimé avec succès.";
+
+    // Redirection pour éviter la resoumission du formulaire
+    header("Location: " . $_SERVER['PHP_SELF']);
+    exit();
+}
+
+if (isset($_POST['ajout_membre'])) {
     // Récupération des données du formulaire
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
@@ -100,10 +182,10 @@ $conn->close();
 <style>
         .profile-photo {
             border-radius: 50%;
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             object-fit: cover;
-
+            cursor: pointer;
         }
         .form-container {
             border-radius: 15px;
@@ -175,6 +257,53 @@ $conn->close();
         <img src="<?php echo htmlspecialchars($admin['photo_admin']); ?>" alt="Photo de Profil" class="profile-photo  m-2 mt-0 mb-0">
     </div>
 </nav>
+    <!-- Modal du profile -->
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileModalLabel">Modifier le profil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="updateProfileForm" method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label for="profileIdentifiant" class="form-label">Identifiant</label>
+                            <input type="text" class="form-control" id="profileIdentifiant" name="identifiant" value="<?php echo htmlspecialchars($admin['identifiant']); ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profileNom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="profileNom" name="nom_admin" value="<?php echo htmlspecialchars($admin['nom_admin']); ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profilePrenom" class="form-label">Prénom</label>
+                            <input type="text" class="form-control" id="profilePrenom" name="prenom_admin" value="<?php echo htmlspecialchars($admin['prenom_admin']); ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profileEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="profileEmail" name="email_admin" value="<?php echo htmlspecialchars($admin['email_admin']); ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profileNumero" class="form-label">Téléphone</label>
+                            <input type="tel" class="form-control" id="profileNumero" name="numero_admin" value="<?php echo htmlspecialchars($admin['numero_admin']); ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profilePhoto" class="form-label">Photo</label>
+                            <input type="file" class="form-control" id="profilePhoto" name="photo">
+                        </div>
+                        <button type="submit" name="modifier" class="btn btn-primary">Valider</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    document.querySelector('.profile-photo').addEventListener('click', function() {
+        var profileModal = new bootstrap.Modal(document.getElementById('profileModal'));
+        profileModal.show();
+    });
+    </script>
 
 
     <div class="container-fluid  py-5 bg-hero" style="margin-bottom: 90px; background-color: rgb(118, 189, 12); " >
@@ -230,7 +359,7 @@ $conn->close();
                                 <input type="email" class="form-control bg-light border-0 py-3" name="email" placeholder="Email" >
                             </div>
                             <div class="col-12">
-                                <button class="btn btn-secondary w-100 py-3" type="submit">Ajouter</button>
+                                <button class="btn btn-secondary w-100 py-3" name="ajout_membre" type="submit">Ajouter</button>
                             </div>
                             
                         </div>
