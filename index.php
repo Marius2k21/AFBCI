@@ -133,7 +133,10 @@
         display: none;
     }
 }
-  
+    .slide-title{
+        background-color: white;
+        opacity: 0.7;
+    }
   
     </style>
     <section class="sliders">
@@ -191,14 +194,14 @@
                 </div>
                 <div class="col-lg-6" style="min-height: 400px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100" src="img/fond/icone2.png" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100" src="img/découvrir.jpg" style="object-fit: cover;">
                     </div>
                 </div>
             </div>
             <div class="row gx-0">
                 <div class="col-lg-6" style="min-height: 400px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100" src="img/fond/securiteinformatique.jpg" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100" src="img/FAQ.jpg" style="object-fit: cover;">
                     </div>
                 </div>
                 <div class="col-lg-6 my-lg-5 py-lg-5">
@@ -341,7 +344,7 @@
                 delay: this.config.slideshow.delay,
                 disableOnInteraction: false,
               },
-              speed: 500,
+              speed: 3000,
               preloadImages: true,
               updateOnImagesReady: true,
               

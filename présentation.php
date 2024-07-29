@@ -135,14 +135,14 @@
                 </div>
                 <div class="col-lg-6" style="min-height: 400px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100" src="img/historique.jpg" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100" src="img/discovery.jpg" style="object-fit: cover;">
                     </div>
                 </div>
             </div>
             <div class="row gx-0" id="Mission">
                 <div class="col-lg-6" style="min-height: 400px;">
                     <div class="position-relative h-100">
-                        <img class="position-absolute w-100 h-100" src="img/sit.jpg" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100" src="img/mission.jpg" style="object-fit: cover;">
                     </div>
                 </div>
                 <div class="col-lg-6 my-lg-5 py-lg-5">
